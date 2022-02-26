@@ -34,7 +34,7 @@ class UserRepositoryImplTest {
 
         userRepository.delete(secondUser);
         assertEquals(2, userRepository.count());
-        assertNull(userRepository.findBy(secondUser.getEmail()));
+        assertNotNull(userRepository.findBy(secondUser.getEmail()));
     }
 
     @Test
