@@ -1,5 +1,7 @@
 package africa.semicolon.sendAm.dtos.requests;
 
+import java.util.Objects;
+
 public class RegisterUserRequests {
     private String firstName;
     private String lastName;
