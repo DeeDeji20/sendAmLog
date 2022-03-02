@@ -1,8 +1,10 @@
 package africa.semicolon.sendAm.dtos.responses;
 
+import africa.semicolon.sendAm.data.models.PackageDescription;
+
 public class AddPackageResponse {
     private int id;
-    private String description;
+    private PackageDescription description;
 
     public int getId() {
         return id;
@@ -12,11 +14,11 @@ public class AddPackageResponse {
         this.id = id;
     }
 
-    public String getDescription() {
+    public PackageDescription getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(PackageDescription description) {
         this.description = description;
     }
 }

@@ -1,5 +1,6 @@
 package africa.semicolon.sendAm.services;
 
+import africa.semicolon.sendAm.data.models.PackageDescription;
 import africa.semicolon.sendAm.dtos.requests.AddPackageRequest;
 import africa.semicolon.sendAm.dtos.responses.AddPackageResponse;
 import africa.semicolon.sendAm.exceptions.RegisterFailureException;
@@ -34,9 +35,14 @@ class PackageServicesImplTest {
     void test_that_adding_a_package_give_correct_response() {
         AddPackageRequest packageToAdd = new AddPackageRequest();
         packageToAdd.setId(1);
-
+        PackageDescription description = new PackageDescription();
+        description.setName("My first package");
+        description.setWeightInGrammes(25);
+        packageToAdd.setDescription(description);
+//        System.out.println(packageToAdd.getDescription().toString());
         AddPackageResponse packageResponse= packageService.addPackage(packageToAdd);
         assertEquals(1, packageResponse.getId());
+        assertEquals("My first package", packageResponse.getDescription());
     }
 
 }

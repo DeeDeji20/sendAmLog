@@ -1,6 +1,7 @@
 package africa.semicolon.sendAm.services;
 
 import africa.semicolon.sendAm.dtos.requests.RegisterUserRequests;
+import africa.semicolon.sendAm.dtos.responses.FindUserResponse;
 import africa.semicolon.sendAm.dtos.responses.RegisterUserResponse;
 import africa.semicolon.sendAm.exceptions.RegisterFailureException;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,6 +56,16 @@ class UserServiceImplTest {
         assertEquals("Lota Senior", response.getFullName());
         assertEquals("lota@gmail.com", response.getEmail());
     }
+
+    @Test
+    void find_registered_user_by_email() {
+        RegisterUserRequests lotaForm = createRegisterForm();
+        userService.register(lotaForm);
+        FindUserResponse result = userService.findByEmail(lotaForm.getEmailAddress().toLowerCase());
+
+    }
+
+
 
     private RegisterUserRequests createRegisterForm() {
         RegisterUserRequests registerForm = new RegisterUserRequests();
