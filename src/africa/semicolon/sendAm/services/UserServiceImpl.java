@@ -7,6 +7,7 @@ import africa.semicolon.sendAm.dtos.requests.RegisterUserRequests;
 import africa.semicolon.sendAm.dtos.responses.FindUserResponse;
 import africa.semicolon.sendAm.dtos.responses.RegisterUserResponse;
 import africa.semicolon.sendAm.exceptions.RegisterFailureException;
+import africa.semicolon.sendAm.exceptions.UserNotFoundException;
 
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository = new UserRepositoryImpl();
@@ -44,12 +45,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public FindUserResponse findByEmail(String email) {
+        email = email.toLowerCase();
         User user = userRepository.findBy(email);
         // create response
+        if (user == null) throw new UserNotFoundException("User not found");
         FindUserResponse response = new FindUserResponse();
         response.setEmail(user.getEmail());
         response.setFullName(user.getFullName());
-        return null;
+        return response;
     }
 
 
