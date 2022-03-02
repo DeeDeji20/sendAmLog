@@ -16,20 +16,22 @@ public class UserServiceImpl implements UserService {
 
         if(emailExists(requestForm.getEmailAddress())) throw new RegisterFailureException("Email is not unique");
 
-        System.out.println("Nothing was thrown");
         User user =new User();
         user.setEmail(requestForm.getEmailAddress());
         user.setAddress(requestForm.getAddress());
         user.setPhoneNumber(requestForm.getPhoneNumber());
         user.setFullName(requestForm.getFirstName() + " " + requestForm.getLastName());
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
-        return null;
+        RegisterUserResponse response= new RegisterUserResponse();
+        response.setEmail(savedUser.getEmail());
+        response.setFullName(savedUser.getFullName());
+//        response.setEmail(savedUser.getEmail());
+        return response;
     }
 
     private boolean emailExists(String emailAddress) {
         User user = userRepository.findBy(emailAddress);
-        System.out.println(userRepository.findAll());
         if(user == null) return false;
         return true;
     }

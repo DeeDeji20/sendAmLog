@@ -4,6 +4,14 @@ public class RegisterUserResponse {
     private String fullName;
     private String email;
 
+    @Override
+    public String toString() {
+        return "RegisterUserResponse{" +
+                "fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public String getFullName() {
         return fullName;
     }

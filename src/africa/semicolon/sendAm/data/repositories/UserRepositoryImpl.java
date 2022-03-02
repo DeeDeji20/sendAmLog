@@ -23,7 +23,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findBy(String email) {
         for (User user : usersRepo) {
-            if (user.getEmail() == email) return user;
+            if (user.getEmail().equals(email)) return user;
         }
         return null;
     }

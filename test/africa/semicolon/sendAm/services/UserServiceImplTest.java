@@ -1,6 +1,7 @@
 package africa.semicolon.sendAm.services;
 
 import africa.semicolon.sendAm.dtos.requests.RegisterUserRequests;
+import africa.semicolon.sendAm.dtos.responses.RegisterUserResponse;
 import africa.semicolon.sendAm.exceptions.RegisterFailureException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,17 +36,25 @@ class UserServiceImplTest {
         assertThrows(RegisterFailureException.class, ()-> userService.register(lotaForm));
     }
 
-//    @Test
-//    void test_duplicate_email_different_case_throws_exception(){
-//        RegisterUserRequests lotaForm = createRegisterForm();
-//        //when
-//        userService.register(lotaForm);
-//        System.out.println(userService.getRepository().count());
-//
-//        lotaForm.setEmailAddress("lOTa@gmail.com");
-//        //assert
-//        assertThrows(RegisterFailureException.class, ()-> userService.register(lotaForm));
-//    }
+    @Test
+    void test_duplicate_email_different_case_throws_exception(){
+        RegisterUserRequests lotaForm = createRegisterForm();
+        //when
+       userService.register(lotaForm);
+
+        lotaForm.setEmailAddress("lOTa@gmail.com");
+        //assert
+        assertThrows(RegisterFailureException.class, ()-> userService.register(lotaForm));
+    }
+
+    @Test
+    void restration_returns_correct_response() {
+        RegisterUserRequests lotaForm = createRegisterForm();
+        //wheb
+        var response = userService.register(lotaForm);
+        assertEquals("Lota Senior", response.getFullName());
+        assertEquals("lota@gmail.com", response.getEmail());
+    }
 
     private RegisterUserRequests createRegisterForm() {
         RegisterUserRequests registerForm = new RegisterUserRequests();
