@@ -14,12 +14,14 @@ public class PackageServicesImpl implements PackageServices{
         if (packageAlreadyExist(myPackage.getId())) throw new RegisterFailureException("Package already exists");
         Package packageToBeAdded = new Package();
         packageToBeAdded.setId(myPackage.getId());
-        packageRepository.save(packageToBeAdded);
-        return null;
+        Package savedPackage =packageRepository.save(packageToBeAdded);
+
+        AddPackageResponse packageResponse = new AddPackageResponse();
+        packageResponse.setId(savedPackage.getId());
+        return packageResponse;
     }
 
     private boolean packageAlreadyExist(int id) {
-        Package myPackage = new Package();
         Package foundPackage = packageRepository.findById(id);
         if(foundPackage == null) return false;
         return true;

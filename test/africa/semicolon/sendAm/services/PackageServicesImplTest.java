@@ -1,6 +1,7 @@
 package africa.semicolon.sendAm.services;
 
 import africa.semicolon.sendAm.dtos.requests.AddPackageRequest;
+import africa.semicolon.sendAm.dtos.responses.AddPackageResponse;
 import africa.semicolon.sendAm.exceptions.RegisterFailureException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,9 +27,16 @@ class PackageServicesImplTest {
         AddPackageRequest packageToAdd = new AddPackageRequest();
         packageToAdd.setId(1);
         packageService.addPackage(packageToAdd);
-
-
         assertThrows(RegisterFailureException.class, ()-> packageService.addPackage(packageToAdd));
+    }
+
+    @Test
+    void test_that_adding_a_package_give_correct_response() {
+        AddPackageRequest packageToAdd = new AddPackageRequest();
+        packageToAdd.setId(1);
+
+        AddPackageResponse packageResponse= packageService.addPackage(packageToAdd);
+        assertEquals(1, packageResponse.getId());
     }
 
 }
