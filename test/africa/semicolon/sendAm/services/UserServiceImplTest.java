@@ -50,7 +50,7 @@ class UserServiceImplTest {
     @Test
     void restration_returns_correct_response() {
         RegisterUserRequests lotaForm = createRegisterForm();
-        //wheb
+        //when
         var response = userService.register(lotaForm);
         assertEquals("Lota Senior", response.getFullName());
         assertEquals("lota@gmail.com", response.getEmail());

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PackageServicesImplTest {
     PackageServices packageService;
     @BeforeEach
-    void setUP(){
+    void setUp(){
          packageService = new PackageServicesImpl();
     }
     @Test
