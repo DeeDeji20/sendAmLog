@@ -21,15 +21,13 @@ public class PackageServicesImpl implements PackageServices{
 
         packageToBeAdded.setId(myPackage.getId());
         packageToBeAdded.setDescription(description);
-//        System.out.println(myPackage.getDescription().getName());
 
         Package savedPackage =packageRepository.save(packageToBeAdded);
 
         AddPackageResponse packageResponse = new AddPackageResponse();
         packageResponse.setId(savedPackage.getId());
         packageResponse.setDescription(savedPackage.getDescription());
-//        packageResponse.setDescription(savedPackage.getDescription());
-//        System.out.println(savedPackage.getDescription().getName());
+
         return packageResponse;
     }
 
