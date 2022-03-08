@@ -5,6 +5,7 @@ import africa.semicolon.sendAm.data.models.PackageDescription;
 public class AddPackageRequest {
     private int id;
     private PackageDescription description;
+    private int quantity;
 
 
     public int getId() {
@@ -21,5 +22,14 @@ public class AddPackageRequest {
 
     public void setDescription(PackageDescription description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "AddPackageRequest{" +
+                "id=" + id +
+                ", description=" + description +
+                ", quantity=" + quantity +
+                '}';
     }
 }

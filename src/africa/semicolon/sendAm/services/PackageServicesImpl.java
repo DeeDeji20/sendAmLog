@@ -1,6 +1,7 @@
 package africa.semicolon.sendAm.services;
 
 import africa.semicolon.sendAm.data.models.Package;
+import africa.semicolon.sendAm.data.models.PackageDescription;
 import africa.semicolon.sendAm.data.repositories.PackageRepository;
 import africa.semicolon.sendAm.data.repositories.PackageRepositoryImpl;
 import africa.semicolon.sendAm.dtos.requests.AddPackageRequest;
@@ -13,14 +14,22 @@ public class PackageServicesImpl implements PackageServices{
     public AddPackageResponse addPackage(AddPackageRequest myPackage) {
         if (packageAlreadyExist(myPackage.getId())) throw new RegisterFailureException("Package already exists");
         Package packageToBeAdded = new Package();
+        PackageDescription description = new PackageDescription();
+        description.setName(myPackage.getDescription().getName());
+        System.out.println(myPackage.getDescription().getName());
+        description.setWeightInGrammes(myPackage.getDescription().getWeightInGrammes());
+
         packageToBeAdded.setId(myPackage.getId());
-        packageToBeAdded.setDescription(myPackage.getDescription());
+        packageToBeAdded.setDescription(description);
+//        System.out.println(myPackage.getDescription().getName());
+
         Package savedPackage =packageRepository.save(packageToBeAdded);
 
         AddPackageResponse packageResponse = new AddPackageResponse();
         packageResponse.setId(savedPackage.getId());
         packageResponse.setDescription(savedPackage.getDescription());
-        System.out.println(savedPackage.getDescription());
+//        packageResponse.setDescription(savedPackage.getDescription());
+//        System.out.println(savedPackage.getDescription().getName());
         return packageResponse;
     }
 

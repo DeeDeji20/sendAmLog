@@ -8,4 +8,6 @@ public interface PackageServices {
     AddPackageResponse addPackage(AddPackageRequest myPackage);
 
     PackageRepository getRepository();
+
+//    void updatePackage(AddPackageRequest packageToUpdate);
 }

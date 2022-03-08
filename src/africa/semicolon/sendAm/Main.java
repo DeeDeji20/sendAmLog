@@ -1,6 +1,8 @@
 package africa.semicolon.sendAm;
 
+import africa.semicolon.sendAm.controllers.PackageControllers;
 import africa.semicolon.sendAm.controllers.UserControllers;
+import africa.semicolon.sendAm.dtos.requests.AddPackageRequest;
 import africa.semicolon.sendAm.dtos.requests.RegisterUserRequests;
 import africa.semicolon.sendAm.dtos.responses.FindUserResponse;
 import africa.semicolon.sendAm.dtos.responses.RegisterUserResponse;
@@ -13,6 +15,7 @@ import java.util.Scanner;
 @SpringBootApplication
 public class Main {
     public static UserControllers userController = new UserControllers();
+    public static PackageControllers packageController = new PackageControllers();
     public static void main(String[] args) {
 
         SpringApplication.run(Main.class, args);
@@ -32,18 +35,25 @@ public class Main {
     private static void loadOptions() {
         String options = """
                 -> A for Register
-                -> B for find by email              
-                """;
+                -> B for find by email
+                -> C for add package""";
 //        display(options);
         String input =  collectInput(options);
         switch (input.toLowerCase()){
             case "a" ->loadRegisterForm();
             case "b" -> askUserForEmail();
+            case "c" -> addPackage();
             default -> {
                 display("Get sense");
                 loadOptions();
             }
         }
+    }
+
+    private static void addPackage() {
+        AddPackageRequest packageToAdd = new AddPackageRequest();
+//        packageToAdd.setId();
+//        packageToAdd.setId();
     }
 
     private static void askUserForEmail() {
@@ -53,7 +63,7 @@ public class Main {
 
     private static void loadRegisterForm() {
         RegisterUserRequests form = new RegisterUserRequests();
-        form.setEmailAddress(collectInput("Enter your emial address"));
+        form.setEmailAddress(collectInput("Enter your email address"));
         form.setAddress(collectInput("Enter your address"));
         form.setFirstName(collectInput("Enter your firstname"));
         form.setLastName(collectInput("Enter your lastName"));
@@ -66,6 +76,7 @@ public class Main {
     private static String collectInput(String message) {
         Scanner scanner = new Scanner(System.in);
         display(message);
+//        if()
         return scanner.nextLine();
     }
 
